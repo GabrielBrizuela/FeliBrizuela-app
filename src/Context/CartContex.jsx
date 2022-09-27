@@ -61,7 +61,7 @@ const CartProvider = (props) => {
 
 
     return (
-        <CartContext.Provider value= {(
+        <CartContext.Provider value= {{
             deleteOne,
             isInCart,
             deleteAll,
@@ -70,7 +70,7 @@ const CartProvider = (props) => {
             cart,
             nombre,
             saludo
-        )}>
+        }}>
         {props.children}
         </CartContext.Provider>
     );

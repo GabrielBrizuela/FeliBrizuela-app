@@ -17,7 +17,7 @@ const ItemListContainer = (props) => {
         const getProductos = new Promise ((resolve)=> {
             setTimeout (()=> {
                 resolve(productos);
-            }, 2000);
+            }, 500);
         });
         if (categoryId) {
             getProductos.then (resolve => setItems(resolve.filter (productos=> productos.categoryId === categoryId)));
