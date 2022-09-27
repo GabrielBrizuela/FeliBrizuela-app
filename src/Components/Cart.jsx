@@ -1,32 +1,23 @@
-import React from "react";
-import { useCartContext } from "../Context/CartContex";
-import { Link } from 'react-router-dom';
-import CartItem from "./CartItem";
+import { useContext } from "react";
+import { CartContext } from "../Context/CartContex";
 
 
-const Cart = ()=> {
-    const { cart, totalPrecio } = useCartContext ();
 
-    if (cart.lenght === 0){
-        return (
-            <div>
-            <p>No hay elementos en el carrito</p>
-            <Link to="/">Hacer una compra</Link> 
-            </div>
-        );
-    }
+const Cart = () => {
+   const { cart, deleteOne, deleteAll} = useContext(CartContext);
+   return (
+    <div>
+       <h1> Cart </h1>
+        {cart.map ((items)=> (
+            <div key= {items.id}>
+                <h2> {items.nombre}</h2>
+                <button onclick ={() => deleteOne (items.id)}> Delete</button>
+                </div>
 
-    return (
-        <div>
-            {
-                cart.map(productos => <CartItem key={productos.id} productos={productos}/>)
-            }
-            <p>
-                Total: {totalPrecio ()}
-                
-            </p>
-        </div>
-    );
+        ))}
+        <button onClick={deleteAll}> Delete All </button>
+    </div>
+   )
 };
 
 export default Cart;

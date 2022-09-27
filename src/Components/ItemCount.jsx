@@ -1,37 +1,24 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const ItemCount = ({ stock, initial, onAdd }) => {
     const [cantidad, setcantidad] = useState(initial);
-    const [itemStock, setItemStock] = useState(stock);
-    const [itemAdd, setItemAdd] = useState(onAdd);
+   
 
-    const restarCantidad = (valor) => {
-        if (valor > 0) {
-            setcantidad(valor);
-        }
-    }
+    const aumentarCantidad = () => {
+        cantidad < stock && setcantidad ( cantidad +1);
+    };
 
-    const aumentarCantidad = (valor) => {
-        if (valor <= itemStock) {
-            setcantidad(valor);
-        }
-    }
+    const restarCantidad = () => {
+        cantidad > initial && setcantidad ( cantidad -1);
+    };
 
     const agregarProducto = () => {
-        if (itemStock > 0) {
-            setItemStock(itemStock - cantidad);
-            setItemAdd(itemAdd + cantidad);
-        }
+        if (stock > 0) {
+        onAdd (cantidad);
+    };};
 
-        onAdd (cantidad)
-
-    }
-
-    useEffect (()=> {
-        setcantidad (parseInt (initial));
-    }, [initial])
-
+  
 
     return (
 
@@ -39,16 +26,19 @@ const ItemCount = ({ stock, initial, onAdd }) => {
             <div className="row">
                 <div className="col-md-2">
                     <p className="text-center">Nombre del Producto</p>
-                    <div className="input-group">
-                        <input type="button" className="btn btn-secondary" value="-" onClick={() => { restarCantidad(cantidad - 1) }} />
-                        <input type="text" className="form-control" value={cantidad} onChange={()=>{}} />
-                        <input type="button" className="btn btn-secondary" value="+" onClick={() => { aumentarCantidad(cantidad + 1) }} />
-                    </div>
-                    <div className="d-grid gap-2 py-3">
-                        <button className="btn btn-primary" type="button" onClick={() => { agregarProducto() }} >Agregar</button>
-                    </div>
-                    <p>Productos Seleccionados: {itemAdd}</p>
-                </div>
+                    <button className="btn-counter" onClick={aumentarCantidad}>
+                    +
+                </button>
+                <p style={{ fontSize: '24px' }}>{cantidad} </p>
+                <button className="btn-counter" onClick={restarCantidad}>
+                    -
+                </button>
+            </div>
+            <button className="btn-add" onClick={agregarProducto}>
+                Agregar al carrito
+            </button>
+                   
+                
             </div >
         </div>
     )

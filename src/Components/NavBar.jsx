@@ -13,9 +13,7 @@ const NavBar = () => (
             <li className="nav-item">
                 <NavLink className="nav-link link_header" to='/'>Inicio</NavLink>
             </li>
-            <li className="nav-item">
-                <NavLink className="nav-link link_header" to='/'>Contacto</NavLink>
-            </li>
+           
             <li className="nav-item">
                 <NavLink className="nav-link link_header" to='/category/bidon'>Bidones</NavLink>
             </li>

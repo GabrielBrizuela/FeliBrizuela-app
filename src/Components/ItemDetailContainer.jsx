@@ -10,19 +10,23 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {
         const getItems = () =>
-            new Promise((resolve) => {
-               setTimeout(() => {
-                    resolve(productos.find(productos=> productos.id=== parseInt(detalleId))|| []);
+            new Promise((res, rej) => {
+                const producto = productos.find ((prod) => prod.id === Number (detalleId));
+                setTimeout (() => {
+                    res (producto);
                 }, 500);
- 
-            } );
-              getItems ().then((resolve)=> {
-                setItems(resolve);
+
+            });
+
+              getItems ().then((info)=> {
+                setItems(info);
                 
+            })
+            .catch((error) => {
+                console.log(error);
             });
        
-       
-    }, [detalleId])
+    }, [detalleId]);
 
     return (
         <div style={{ minHeight: '70vh' }}>
